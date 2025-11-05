@@ -1,0 +1,9 @@
+.container{
+
+    margin: 10px 350px;
+    background-color: bisque;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height:80px;
+    align-items: center;}
+

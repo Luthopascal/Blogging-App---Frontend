@@ -1,0 +1,33 @@
+
+
+.Welcome-container {
+    display: flex;
+    flex-direction: column; /* 👈 Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    border: solid;
+    height: 150px; /* optionally increase height to give space */
+    margin-top: 100px;
+
+h3 {
+    margin: 5px 0;
+    font-weight: 100;
+
+  }
+}
+  
+  .gradient-text {
+    background: linear-gradient(90deg, #3f64e7, #008cff, #3f64e7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 50px;
+
+  }
+
+  .Blog-containter {
+    margin-top: 110px;
+    
+  }
+
+  
+ 

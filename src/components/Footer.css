@@ -1,0 +1,11 @@
+
+.Main-Footer {
+    background-color: #000000;
+    padding: 20px;
+    text-align: center;
+    min-height: 100px;
+    margin-top: auto;
+    width: 100vw; /* Full viewport width */
+    margin-left: calc(-50vw + 50%); /* Center it if parent has constraints */
+    color: white;
+}
