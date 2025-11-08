@@ -16,7 +16,7 @@ function Welcome() {
              <NonAuthBlogPosts/>
              </div>
 
-             <div style={{ marginTop: '50px' }}></div>
+             <div style={{ marginTop: '50px', }}></div>
 
         
           <div className="Footer">

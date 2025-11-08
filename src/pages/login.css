@@ -1,0 +1,103 @@
+
+
+
+.login-main-container{
+
+    height: 79vh;
+    display: flex;
+    
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.login-container{
+    height: 550px;
+    width:350px;
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* 👈 Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    
+
+
+    h2{
+        margin-bottom: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    p{
+        margin-bottom: 30px;
+
+    }
+
+    .logo{
+        width: 170px;
+        height: 100px;
+        margin-bottom: 20px;
+
+    }
+
+   
+
+}
+
+
+.email-form {
+    display: flex;
+    flex-direction: column;     /* stack the form rows vertically */
+    align-items: center;        /* center them horizontally */
+    gap: 20px;                  /* space between each label-input pair */
+    margin-top: 20px;
+
+    input{
+        margin-bottom: 30px;
+        height: 19px;
+        width: 180px;
+        padding: 5px;
+        font-size: 16px;
+       
+        border: 2px,solid,#ccc;
+    }
+}
+
+.button-row{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.LoginButton{
+    width: 80px;
+    background-color:#add8e6 ;
+    height: 30px;
+    border: 0;
+    font-size: 14px;
+
+   
+}
+
+.LoginButton:hover {
+    background-color: green;
+    color: white;
+}
+
+
+.SignUp{
+    width: 80px;
+    border: 0;
+
+    height: 30px;
+    font-size: 14px;
+}
+
+.SignUp:hover {
+    background-color: orange;
+    color: white;
+}
+

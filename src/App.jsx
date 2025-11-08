@@ -4,20 +4,24 @@ import NonAuthNavBar from './components/NonAuthNavBar';
 import Welcome from './pages/Welcome';
 import './App.css';
 import Footer from './components/Footer';
+import LoginPage from './pages/Login';
 
 
 function App () {  // initialize App component
   return (
-     <div>
+     
     <div className = "container"> {/*header container div*/}
 
     <BrowserRouter> {/* Wrap the application in BrowserRouter to enable routing */}
     <NonAuthNavBar /> {/* Render the NonAuthNavBar component */}
   
       <Routes>
+        <Route path="/Welcome" element={<Welcome/>} />
         <Route path="/" element={<Welcome/>} />
-      {/* <Route path="/about" element={<h1>About Page</h1>} />
-        <Route path="/contact" element={<h1>Contact Page</h1>} />*/}
+        <Route path="/login" element={<LoginPage/>} />
+
+
+       {/* <Route path="/contact" element={<h1>Contact Page</h1>} />*/}
       </Routes>
 
       <Footer/> {/* Render the Footer component */}
@@ -26,7 +30,7 @@ function App () {  // initialize App component
 
     </div>
 
-    </div>
+   
 
   );
 }
