@@ -5,6 +5,8 @@ import Welcome from './pages/Welcome';
 import './App.css';
 import Footer from './components/Footer';
 import LoginPage from './pages/Login';
+import SignupPage from './pages/signup';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 
 function App () {  // initialize App component
@@ -19,7 +21,12 @@ function App () {  // initialize App component
         <Route path="/Welcome" element={<Welcome/>} />
         <Route path="/" element={<Welcome/>} />
         <Route path="/login" element={<LoginPage/>} />
-
+        <Route path="/Signup" element={<SignupPage/>} />
+        <Route path="/protected-route" element={
+         <ProtectedRoute>
+          <h2>This is a protected menu route</h2>   {/* when the token is activated the route becomes protected*/}
+          </ProtectedRoute>
+        } />
 
        {/* <Route path="/contact" element={<h1>Contact Page</h1>} />*/}
       </Routes>
