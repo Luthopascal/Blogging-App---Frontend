@@ -1,7 +1,10 @@
 nav{
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    height: 80px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+
 
 
 }
@@ -20,6 +23,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
+    
     height: 60px;
     gap: 30px; /* 👈 adds space between links */
 }

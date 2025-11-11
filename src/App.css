@@ -1,10 +1,18 @@
-.container{
-
-    margin: 10px 350px;
+/* Main container - centers everything */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+  
+  /* If you have a separate navbar wrapper, style it like this */
+  .navbar-wrapper {
     background-color: bisque;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    height:80px;
-    align-items: center;
-    background-image: url(../assets/Whisk_2c381e2514b9b6fb6784d2d384f690f2dr.png);}
-
+    height: 80px;
+    margin-bottom: 20px;
+    background-image: url(../assets/Whisk_2c381e2514b9b6fb6784d2d384f690f2dr.png);
+  }
