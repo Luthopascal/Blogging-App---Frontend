@@ -1,0 +1,65 @@
+/* authnavbar.css */
+
+/* --- Base Navigation Bar --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensure items are vertically centered */
+    height: 80px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    padding: 0 20px; /* Add horizontal padding to the nav itself */
+}
+
+/* --- Navigation Links Container (Matches .main-nav-container style) --- */
+.nav-links {
+    /* Use 'nav-links' as this is the class used in AuthNavBar.jsx */
+    padding: 10px 0; /* Adjusted padding as the 'nav' has padding now */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px; /* Adjust height based on content */
+    gap: 30px; 
+}
+
+/* --- Navigation Buttons (Logout Button) --- */
+.nav-links button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Added transition for hover effect */
+}
+
+.nav-links button:hover {
+    /* ⚠️ NOTE: The original hover was 'background-color: white', but typically
+       for a colored button, you want a slightly darker/lighter color or an inverse.
+       I'll stick to the provided requirement but you might want to adjust this. */
+    background-color: white; /* As requested, but this might make the text hard to read */
+    color: #007bff; /* Add color change on hover since button background is white */
+    border: 1px solid #007bff; /* Add border to maintain button size */
+}
+
+/* --- Anchor/Link Styling --- */
+a {
+    text-decoration: none;
+    color: black; 
+    transition: color 0.3s ease; /* Added transition */
+    font-size: 16px;
+}
+
+a:hover {
+    color: #007bff; 
+}
+
+.logo {
+    /* Style for the 'Bloggify' logo link */
+    font-size: 1.5rem; 
+    font-weight: bold;
+    margin-left: 0; /* Removed explicit margin-left as nav has padding */
+    display: flex;
+    align-items: center;
+}

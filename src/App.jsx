@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NonAuthNavBar from './components/NonAuthNavBar';
+import AuthNavBar from './components/AuthNavBar';
+import MainNavAuth from './lib/MainNavAuth';
 import Welcome from './pages/Welcome';
 import './App.css';
 import Footer from './components/Footer';
@@ -8,12 +10,16 @@ import LoginPage from './pages/Login';
 import SignupPage from './pages/signup';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import HomePage from './pages/homePage';
+import { AuthProvider } from './lib/Authcontext';
+import NewPost from './pages/NewPost';
+
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <div className="container">
-        <NonAuthNavBar />
+        <MainNavAuth />
         
         <Routes>
           <Route path="/Welcome" element={<Welcome />} />
@@ -26,11 +32,22 @@ function App() {
               <HomePage />
             </ProtectedRoute>
           } />
+
+           <Route path="/New-Post" element={
+            <ProtectedRoute>
+              <NewPost/>
+            </ProtectedRoute>
+          } />
+
+
         </Routes>
+
+        
 
         <Footer />
       </div>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 
