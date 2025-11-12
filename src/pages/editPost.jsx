@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../lib/Authcontext';
 import { useParams, useNavigate } from 'react-router-dom';
-import './editPost.css';
+import './EditPost.css';
 
 const EditPost = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Get post ID from URL
   const { token } = useAuth();
   const navigate = useNavigate();
   
@@ -51,11 +51,17 @@ const EditPost = () => {
         type: 'error', 
         text: error.response?.data?.message || 'Failed to load blog post' 
       });
+      
+      // If unauthorized or not found, redirect after 2 seconds
+      if (error.response?.status === 403 || error.response?.status === 404) {
+        setTimeout(() => navigate('/home-page'), 2000);
+      }
     } finally {
       setLoading(false);
     }
   };
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -63,6 +69,7 @@ const EditPost = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -106,6 +113,7 @@ const EditPost = () => {
     }
   };
 
+  // Handle cancel
   const handleCancel = () => {
     navigate('/home-page');
   };

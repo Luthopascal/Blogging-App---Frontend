@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import HomePage from './pages/homePage';
 import { AuthProvider } from './lib/Authcontext';
 import NewPost from './pages/NewPost';
+import EditPost from './pages/editPost';
 
 
 function App() {
@@ -38,6 +39,12 @@ function App() {
               <NewPost/>
             </ProtectedRoute>
           } />
+          
+          <Route path="/Edit-Post/:id" element={
+     <ProtectedRoute>
+       <EditPost />
+     </ProtectedRoute>
+   } />
 
 
         </Routes>
