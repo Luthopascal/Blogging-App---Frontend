@@ -1,0 +1,156 @@
+/* Edit Post Container */
+.edit-post-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .edit-post-container h1 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  /* Loading State */
+  .loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  /* Message (success/error) */
+  .message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  
+  .message.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #4caf50;
+  }
+  
+  .message.error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef5350;
+  }
+  
+  /* Edit Post Form */
+  .edit-post-form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 24px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 200px;
+    line-height: 1.6;
+  }
+  
+  /* Form Buttons */
+  .form-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+  
+  .btn-save,
+  .btn-cancel {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-save {
+    background: #2196f3;
+    color: white;
+  }
+  
+  .btn-save:hover:not(:disabled) {
+    background: #1976d2;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+  }
+  
+  .btn-cancel {
+    background: #e0e0e0;
+    color: #333;
+  }
+  
+  .btn-cancel:hover:not(:disabled) {
+    background: #bdbdbd;
+  }
+  
+  .btn-save:disabled,
+  .btn-cancel:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .edit-post-container {
+      padding: 15px;
+      margin: 20px auto;
+    }
+  
+    .edit-post-form {
+      padding: 20px;
+    }
+  
+    .edit-post-container h1 {
+      font-size: 1.5rem;
+    }
+  
+    .form-buttons {
+      flex-direction: column;
+    }
+  
+    .btn-save,
+    .btn-cancel {
+      width: 100%;
+    }
+  }

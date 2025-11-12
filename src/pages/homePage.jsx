@@ -1,64 +1,61 @@
-// src/pages/homePage.jsx
-import React, { useEffect, useState } from 'react';
-import api from '../lib/axios.js';
-import './homePage.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth } from '../lib/Authcontext';
+import BlogPostCard from '../components/BlogPostCard';
+import './homePage.css'; // Using your existing CSS file name
 
-function HomePage() {
+const HomePage = () => {
+  const { token } = useAuth();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
+  // Fetch all blogs on component mount
   useEffect(() => {
-    let mounted = true;
-    
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const res = await api.get('/AllBlogs');
-        console.log('AllBlogs response:', res.data);
-        
-        let blogData = [];
-        // Enhanced logic to extract blog array from various API response structures
-        if (Array.isArray(res.data)) {
-          blogData = res.data;
-        } else if (res.data?.blogs && Array.isArray(res.data.blogs)) {
-          blogData = res.data.blogs;
-        } else if (res.data?.data && Array.isArray(res.data.data)) {
-          blogData = res.data.data;
-        } else if (res.data?.message && Array.isArray(res.data.message)) {
-          blogData = res.data.message;
-        }
-        
-        if (mounted) {
-          setBlogs(blogData);
-        }
-      } catch (err) {
-        console.error('Error fetching blogs:', err);
-        if (err.response) {
-          console.error('Server response:', err.response.status, err.response.data);
-        }
-        
-        if (mounted) {
-          const errorMsg = err.response?.data?.message || err.message || 'Failed to load blogs';
-          setError(errorMsg);
-        }
-      } finally {
-        if (mounted) {
-          setLoading(false);
-        }
-      }
-    };
-    
     fetchBlogs();
-    return () => { mounted = false; };
   }, []);
+
+  const fetchBlogs = async () => {
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/api/v1/auth/AllBlogs',
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+
+      if (response.data.success) {
+        setBlogs(response.data.blogs);
+      }
+    } catch (err) {
+      console.error('Error fetching blogs:', err);
+      setError(err.response?.data?.message || 'Failed to fetch blogs');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle delete - remove from UI
+  const handleDelete = (postId) => {
+    setBlogs(blogs.filter(blog => blog._id !== postId));
+  };
+
+  // Handle update - update in UI
+  const handleUpdate = (updatedPost) => {
+    setBlogs(blogs.map(blog => 
+      blog._id === updatedPost._id ? updatedPost : blog
+    ));
+  };
 
   if (loading) {
     return (
       <div className="blog-container">
-        <p className="loading-text">Loading blogs...</p>
+        <div className="loading">Loading blogs...</div>
       </div>
     );
   }
@@ -66,49 +63,38 @@ function HomePage() {
   if (error) {
     return (
       <div className="blog-container">
-        <div className="error-container">
-          <h3 className="error-title">Error loading blogs</h3>
-          <p className="error-message">{error}</p>
-          <button className="retry-button" onClick={() => window.location.reload()}>
-            Retry
-          </button>
-        </div>
+        <div className="error-message">{error}</div>
+        <button onClick={fetchBlogs} className="retry-button">
+          Retry
+        </button>
       </div>
     );
   }
 
   return (
     <div className="blog-container">
-      {/* This title is full-width and centered by the CSS you provided */}
-      <h1 className="page-title">My Blogs</h1> 
-      
-      <div className="blog-card-container">
-        {blogs.length === 0 ? (
-          <p className="no-posts-message">No blog posts found.</p>
-        ) : (
-          blogs.map((blog, index) => (
-            <div className="blog-card-1" key={blog._id || blog.id || index}>
-              {blog.image && (
-                <img 
-                  src={blog.image} 
-                  alt={blog.title || 'Blog post'} 
-                  className="blog-image" 
-                />
-              )}
-              {/* NEW WRAPPER for content to help Flexbox manage spacing */}
-              <div className="blog-content-wrapper"> 
-                  <h2 className="blog-title">{blog.title || 'Untitled'}</h2>
-                  <p className="blog-date">{blog.dateCreated || blog.createdAt || 'No date'}</p>
-                  {blog.content && (
-                      <p className="blog-excerpt">{blog.content.substring(0, 100)}...</p>
-                  )}
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+      <h1 className="page-title">My Blogs</h1>
+      <p className="blog-count">{blogs.length} {blogs.length === 1 ? 'post' : 'posts'} available</p>
+
+      {blogs.length === 0 ? (
+        <div className="no-blogs">
+          <h2>No blog posts yet</h2>
+          <p>Be the first to create a blog post!</p>
+        </div>
+      ) : (
+        <div className="blog-card-container">
+          {blogs.map((blog) => (
+            <BlogPostCard
+              key={blog._id}
+              post={blog}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default HomePage;
