@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../lib/Authcontext';
@@ -7,23 +6,34 @@ import './BlogPostCard.css';
 
 const BlogPostCard = ({ post, onDelete }) => {
   const { user, token } = useAuth();
+
+  const BlogPostCard = ({ post, onDelete }) => {
+    const { user, token } = useAuth();
+    
+    // TEMPORARY DEBUG - Remove after fixing
+    console.log('Full post object:', post);
+    console.log('Post author:', post.author);
+    console.log('Post author type:', typeof post.author);}
+    
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   // Check if current user is the author of this post
-  const isAuthor = user && post.author && (user._id === post.author._id || user._id === post.author);
+  // Handle both object and string author formats
+  const authorId = typeof post.author === 'object' ? post.author?._id : post.author;
+  const userId = user?._id || user?.id;
+  
+  const isAuthor = userId && authorId && (userId === authorId || userId.toString() === authorId.toString());
   
   // Debug: Log to see what we're comparing
   console.log('Debug Info:', {
-    userId: user?._id,
-    postAuthorId: post.author?._id || post.author,
+    userId: userId,
+    authorId: authorId,
     postAuthor: post.author,
-    isAuthor: isAuthor
+    isAuthor: isAuthor,
+    userObject: user
   });
-
-  // TEMPORARY: Show buttons for all posts (remove this after debugging!)
-  const showButtons = true; // Change back to: isAuthor
 
   // Handle delete with confirmation
   const handleDelete = async () => {
@@ -101,7 +111,7 @@ const BlogPostCard = ({ post, onDelete }) => {
         </div>
 
         {/* Show Edit/Delete buttons at bottom ONLY if user is the author */}
-        {showButtons && (
+        {isAuthor && (
           <div className="blog-post-buttons">
             <button 
               onClick={handleEdit} 
