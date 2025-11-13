@@ -1,5 +1,5 @@
 import React from "react";
-import './Welcome.css';
+import './welcome.css';
 import NonAuthBlogPosts from "./NonAuthBlogPosts";
 import Footer from "../components/Footer";
 
