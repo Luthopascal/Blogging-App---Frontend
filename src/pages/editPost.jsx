@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../lib/Authcontext';
 import { useParams, useNavigate } from 'react-router-dom';
-import './EditPost.css';
+import './editPost.css';
 
 const EditPost = () => {
   const { id } = useParams(); // Get post ID from URL
