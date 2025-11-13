@@ -6,37 +6,19 @@ import './BlogPostCard.css';
 
 const BlogPostCard = ({ post, onDelete }) => {
   const { user, token } = useAuth();
-
-  const BlogPostCard = ({ post, onDelete }) => {
-    const { user, token } = useAuth();
-    
-    // TEMPORARY DEBUG - Remove after fixing
-    console.log('Full post object:', post);
-    console.log('Post author:', post.author);
-    console.log('Post author type:', typeof post.author);}
-    
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Check if current user is the author of this post
-  // Handle both object and string author formats
+  // Check if current user is the author
   const authorId = typeof post.author === 'object' ? post.author?._id : post.author;
   const userId = user?._id || user?.id;
-  
   const isAuthor = userId && authorId && (userId === authorId || userId.toString() === authorId.toString());
-  
-  // Debug: Log to see what we're comparing
-  console.log('Debug Info:', {
-    userId: userId,
-    authorId: authorId,
-    postAuthor: post.author,
-    isAuthor: isAuthor,
-    userObject: user
-  });
 
   // Handle delete with confirmation
-  const handleDelete = async () => {
+  const handleDelete = async (e) => {
+    e.stopPropagation(); // Prevent card click when clicking delete
+
     if (!window.confirm('Are you sure you want to delete this blog post?')) {
       return;
     }
@@ -68,8 +50,14 @@ const BlogPostCard = ({ post, onDelete }) => {
   };
 
   // Handle edit - navigate to edit page
-  const handleEdit = () => {
+  const handleEdit = (e) => {
+    e.stopPropagation(); // Prevent card click when clicking edit
     navigate(`/Edit-Post/${post._id}`);
+  };
+
+  // Handle card click - navigate to view full post
+  const handleCardClick = () => {
+    navigate(`/View-Post/${post._id}`);
   };
 
   // Truncate content to show preview
@@ -80,7 +68,7 @@ const BlogPostCard = ({ post, onDelete }) => {
   };
 
   return (
-    <div className="blog-card">
+    <div className="blog-card" onClick={handleCardClick}>
       {/* Display cover image if exists */}
       {post.imageUrl && (
         <div className="blog-post-image">

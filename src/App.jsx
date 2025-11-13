@@ -13,6 +13,7 @@ import HomePage from './pages/homePage';
 import { AuthProvider } from './lib/Authcontext';
 import NewPost from './pages/NewPost';
 import EditPost from './pages/editPost';
+import ViewPost from './pages/ViewPost';
 
 
 function App() {
@@ -45,7 +46,12 @@ function App() {
        <EditPost />
      </ProtectedRoute>
    } />
-
+   
+   <Route path="/View-Post/:id" element={
+     <ProtectedRoute>
+       <ViewPost />
+     </ProtectedRoute>
+   } />
 
         </Routes>
 
